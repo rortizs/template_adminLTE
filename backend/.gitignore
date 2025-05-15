@@ -1,0 +1,8 @@
+#.env no copiar
+.env
+
+#.htaccess
+.htaccess
+
+
+#cualquier configuracion relevante o que exponga usuarios o password
