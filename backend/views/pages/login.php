@@ -1,64 +1,67 @@
+<div id="back"></div>
+
 <div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>CA</b>DEP</a>
+
+  <div class="login-logo">   
+
+    <img src="<?php echo $path ?>views/assets/img/icono-blanco.png" class="img-responsive" style="padding:30px 100px 0px 100px">
+
   </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="../../index3.html" method="post">
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
+  <div class="login-box-body">
 
-      <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
+    <p class="login-box-msg">Ingresar al sistema</p>
+
+    <form method="post">
+
+      <div class="form-group has-feedback">
+
+        <input type="text" class="form-control" placeholder="Usuario" name="ingUsuario" required>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+
       </div>
-      <!-- /.social-auth-links -->
 
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p>
-    </div>
-    <!-- /.login-card-body -->
+      <div class="form-group has-feedback">
+
+        <input type="password" class="form-control" placeholder="Contraseña" name="ingPassword" required>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-xs-4">
+
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+
+        </div>
+
+      </div>
+      <?php
+      //validate if the user is logged in
+      if (isset($_SESSION['iniciarSesion']) && $_SESSION['iniciarSesion'] == 'ok') {
+        echo '<script>
+          window.location = "inicio";
+        </script>';
+      }
+      //validate if the user is logged in
+      $login = new UsersController();
+      $login->ctrLoginUser();
+      ?>
+
+      <?php if (isset($_GET['expired'])): ?>
+        <script>
+          Swal.fire({
+            icon: 'info',
+            title: 'Sesión finalizada',
+            text: 'Tu sesión ha expirado por inactividad. Por favor, inicia sesión nuevamente.',
+            confirmButtonText: 'Aceptar'
+          });
+        </script>
+      <?php endif; ?>
+
+    </form>
+
   </div>
+
 </div>

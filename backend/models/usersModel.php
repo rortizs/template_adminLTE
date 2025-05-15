@@ -30,6 +30,22 @@ class UsersModel
     $stmt = null;
   }
 
+  static public function mdlGetUserById($table, $item, $value)
+  {
+    if ($item != null) {
+      $stmt = Connect::connection()->prepare("SELECT * FROM $table WHERE $item = :$item");
+      $stmt->bindParam(":" . $item, $value, PDO::PARAM_STR);
+      $stmt->execute();
+      return $stmt->fetch();
+    } else {
+      return null;
+    }
+    $stmt->close();
+    $stmt = null;
+  }
+
+
+
   static public function mdlRegisterUser($table, $data)
   {
     $stmt = Connect::connection()->prepare("INSERT INTO $table(name, user, password, profile, image, status) VALUES (:name, :user, :password, :profile, :image, :status)");
